@@ -1,0 +1,53 @@
+textarea {
+
+  resize: none;
+
+}
+
+.titleBar {
+
+  float: top;
+  height: 40px;
+  background-color: #EEEEEE;
+  width: 100%;
+  margin: 0;
+}
+
+
+.buttons {
+
+  text-align: center;
+  top: 10px;
+  position: relative;
+}
+
+.active {
+
+  background-color: #E8F2FF;
+}
+
+.panel {
+
+  width: 50%;
+  float: left;
+}
+ iframe {
+
+   border: gray;
+
+ }
+
+.hidden {
+
+  display: none;
+}
+
+#title {
+
+  padding: -0px;
+  font-size: 160%;
+  position: absolute;
+  top: -5px;
+  left: 20px;
+
+}

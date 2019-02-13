@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+
+<html>
+
+    <head>
+
+        <title>jQuery Codeplayer</title>
+
+        <link rel="stylesheet" type="text/css" href="styleCodeplayer.css">
+
+        <link rel="stylesheet" type="text/css" href="jquery-ui-1.12.1/jquery-ui.css">
+
+        <script type="text/javascript" src="jquery.min.js"></script>
+
+        <script type="text/javascript" src="jquery-ui-1.12.1/jquery-ui.js"></script>
+
+        <meta charset="utf-8"/>
+
+         <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    </head>
+
+    <body>
+
+      <div class="titleBar"> <h1 id="title">Code Previewer</h1>
+
+        <div class="buttons">
+
+
+          <button type="button" class="toggleButton active" id="html">HTML</button>
+
+          <button type="button" class="toggleButton active" id="css">CSS</button>
+
+          <button type="button" class="toggleButton active" id="java">JS</button>
+
+          <button type="button" class="toggleButton active" id="code">Code</button>
+
+        </div>
+
+      </div>
+
+      <div id="bodyContainer">
+
+        <textarea id="htmlPanel" class="panel" placeholder="HTML"></textarea>
+
+        <textarea id="cssPanel" class="panel hidden" placeholder="CSS"></textarea>
+
+        <textarea id="javaPanel" class="panel hidden" placeholder="Java">alert("Hi There!");</textarea>
+
+        <iframe id="codePanel" class="panel"></iframe>
+
+      </div>
+
+
+
+      <script type="text/javascript">
+
+        function updateOutput() {
+
+              $("iframe").contents().find("html").html(
+                "<html><head><style type='text/css'>"
+                +
+                $("#cssPanel").val()
+                +
+                "</style></head><body>"
+                +
+                $("#htmlPanel").val()
+                +
+                "</body></html>");
+
+              document.getElementById("codePanel").contentWindow.eval($("#javaPanel").val());
+
+              eval($("#javaPanel").val());
+
+        }
+
+        $(".toggleButton").hover(function() {
+
+            $(this).css("background-color", "grey")
+
+        }, function() {
+
+            $(this).css("background-color", "#EEEEEE")
+        });
+
+        $(".toggleButton").click(function() {
+
+            $(this).toggleClass("active");
+
+            var panelId = $(this).attr("id") + "Panel";
+
+            $("#" + panelId).toggleClass("hidden");
+
+            var numberOfActivePanels = 4 - $(".hidden").length;
+
+            $(".panel").width(($(window).width() / numberOfActivePanels) - 12);
+
+        });
+
+        var textareaHeight = $(window).height() - 60;
+
+        $(".panel").height(textareaHeight);
+
+        $(".panel").width(($(window).width() / 2) - 12);
+
+        $("textarea").keyup(function() {
+
+            updateOutput();
+
+        });
+
+
+      </script>
+
+    </body>
+
+
+</html>
